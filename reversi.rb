@@ -32,6 +32,7 @@ until @quit
   output(@board)
 
   if finished?(@board)
+    
     puts '試合終了'
     puts "白○:#{count_stone(@board, WHITE_STONE)}"
     puts "黒●:#{count_stone(@board, BLACK_STONE)}"
