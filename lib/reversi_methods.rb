@@ -22,11 +22,10 @@ DIRECTIONS = [
   DIRECTION_BOTTOM        = :bottom,
   DIRECTION_BOTTOM_RIGHT  = :bottom_right
 ].freeze
-
 def output(board)
   puts "  #{ROW.join(' ')}"
   board.each.with_index do |row, i|
-    print COL[i].to_s
+    print COL[i]
     row.each do |cell|
       case cell
       when WHITE_STONE then print ' ○'
@@ -46,7 +45,7 @@ def copy_board(to_board, from_board)
   end
 end
 
-def put_stone!(board, cellstr, stone_color, execute = true) # rubocop:disable Style/OptionalBooleanParameter
+def put_stone!(board, cellstr, stone_color, execute = true) # rubocop:disable Style/OptionalBooleanParameters
   pos = Position.new(cellstr:)
   raise '無効なポジションです' if pos.invalid?
   raise 'すでに石が置かれています' unless pos.stone_color(board) == BLANK_CELL
