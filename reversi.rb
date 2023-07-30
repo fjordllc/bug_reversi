@@ -7,10 +7,10 @@ QUIT_COMMANDS = %w[quit exit q].freeze
 
 # @boardは盤面を示す二次元配列
 @board = Array.new(8) { Array.new(8, BLANK_CELL) }
-@board[3][3] = WHITE_STONE # d5
-@board[4][4] = WHITE_STONE # e4
-@board[3][4] = BLACK_STONE # d4
-@board[4][3] = BLACK_STONE # e5
+@board[3][3] = WHITE_STONE # d4
+@board[4][4] = WHITE_STONE # e5
+@board[3][4] = BLACK_STONE # d5
+@board[4][3] = BLACK_STONE # e4
 
 @turn_stone_color = BLACK_STONE # 現在の手番の石色、初手は黒から
 
