@@ -3,6 +3,7 @@
 require 'minitest/autorun'
 require_relative '../lib/reversi_methods'
 
+# 文字列データをゲームで利用できるboardデータとして整備します
 def build_board(datas)
   board = Array.new(8) { Array.new(8, BLANK_CELL) }
   datas.split("\n").each.with_index do |row, j|
@@ -11,6 +12,11 @@ def build_board(datas)
     end
   end
   board
+end
+
+# boardデータを文字列に変換します
+def board_to_string(board)
+  board.transpose.map(&:join).join("\n") << "\n"
 end
 
 def initial_board
@@ -44,7 +50,7 @@ class TestReversi < Minitest::Test
   def test_put_stone
     board = initial_board
     assert put_stone!(board, 'e6', BLACK_STONE)
-    assert_equal build_board(<<~BOARD), board
+    assert_equal <<~BOARD, board_to_string(board)
       00000000
       00000000
       00000000
@@ -55,7 +61,7 @@ class TestReversi < Minitest::Test
       00000000
     BOARD
     assert put_stone!(board, 'f4', WHITE_STONE)
-    assert_equal build_board(<<~BOARD), board
+    assert_equal <<~BOARD, board_to_string(board)
       00000000
       00000000
       00000000
@@ -80,7 +86,7 @@ class TestReversi < Minitest::Test
     BOARD
     board = build_board(initial_data)
     refute put_stone!(board, 'b1', BLACK_STONE)
-    assert_equal build_board(initial_data), board
+    assert_equal initial_data, board_to_string(board)
   end
 
   def test_turn
@@ -95,7 +101,7 @@ class TestReversi < Minitest::Test
       00000000
     BOARD
     assert put_stone!(board, 'b4', BLACK_STONE)
-    assert_equal build_board(<<~BOARD), board
+    assert_equal <<~BOARD, board_to_string(board)
       00000000
       00020000
       00220000
