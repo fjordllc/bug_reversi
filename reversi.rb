@@ -4,9 +4,9 @@ require_relative './lib/reversi_methods'
 
 class Reversi
   include ReversiMethods
-
+  
   QUIT_COMMANDS = %w[quit exit q].freeze
-
+ 
   def initialize
     @board = build_initial_board
     @current_stone = BLACK_STONE
@@ -30,7 +30,7 @@ class Reversi
       end
 
       print "command? (#{@current_stone == WHITE_STONE ? '白○' : '黒●'}) > "
-      command = gets.chomp
+      command = gets.chomp.chars
       break if QUIT_COMMANDS.include?(command)
 
       begin
