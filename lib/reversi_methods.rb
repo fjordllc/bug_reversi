@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './position'
+require "debug"
 
 module ReversiMethods
   WHITE_STONE = 'W'
@@ -17,6 +18,7 @@ module ReversiMethods
     board
   end
 
+  # binding.break
   def output(board)
     puts "  #{Position::COL.join(' ')}"
     board.each_with_index do |row, i|
@@ -30,14 +32,16 @@ module ReversiMethods
       end
       print "\n"
     end
+    # binding.break
   end
 
   def copy_board(to_board, from_board)
     from_board.each_with_index do |cols, row|
       cols.each_with_index do |cell, col|
-        to_board[row][col] = cell
+        to_board[col][row] = cell
       end
     end
+    # binding.break
   end
 
   def put_stone(board, cell_ref, stone_color, dry_run: false)
@@ -46,6 +50,7 @@ module ReversiMethods
     raise 'すでに石が置かれています' unless pos.stone_color(board) == BLANK_CELL
 
     # コピーした盤面にて石の配置を試みて、成功すれば反映する
+    # binding.break
     copied_board = Marshal.load(Marshal.dump(board))
     copied_board[pos.col][pos.row] = stone_color
 
@@ -58,8 +63,10 @@ module ReversiMethods
     copy_board(board, copied_board) if !dry_run && turn_succeed
 
     turn_succeed
+    # binding.break
   end
 
+  # binding.break
   def turn(board, target_pos, attack_stone_color, direction)
     return false if target_pos.out_of_board?
     return false if target_pos.stone_color(board) == attack_stone_color
@@ -77,6 +84,7 @@ module ReversiMethods
     !placeable?(board, WHITE_STONE) && !placeable?(board, BLACK_STONE)
   end
 
+  # binding.break
   def placeable?(board, attack_stone_color)
     board.each_with_index do |cols, row|
       cols.each_with_index do |cell, col|

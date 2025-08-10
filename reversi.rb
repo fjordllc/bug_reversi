@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative './lib/reversi_methods'
+require "debug"
 
 class Reversi
   include ReversiMethods
@@ -44,7 +45,6 @@ class Reversi
         puts "ERROR: #{e.message}"
       end
     end
-
     puts 'finished!'
   end
 
